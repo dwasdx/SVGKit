@@ -36,7 +36,7 @@
 		@autoreleasepool {
 			SVGKImage *image = [[SVGKImage alloc] initWithContentsOfFile:[self.pathsToSVGs pathForResource:@"Note" ofType:@"svg"]];
 			// Yes, this is ARC, yes we do this to quiet a warning
-			NSLog(@"description: %@", [image description]);
+			SVGKLog(@"description: %@", [image description]);
 			[image class];
 			XCTAssertNoThrow(image = nil);
 		}
@@ -55,11 +55,11 @@
 			SVGKImage *image = [[SVGKImage alloc] initWithContentsOfFile:[self.pathsToSVGs pathForResource:@"CurvedDiamond" ofType:@"svg"]];
 			
 			// Yes, this is ARC, yes we do this to quiet a warning
-			NSLog(@"description: %@", [image description]);
+			SVGKLog(@"description: %@", [image description]);
 			[image class];
 			
 			XCTAssertNoThrow(image = [SVGKImage imageWithContentsOfFile:[self.pathsToSVGs pathForResource:@"Lion" ofType:@"svg"]]);
-			NSLog(@"description: %@", [image description]);
+			SVGKLog(@"description: %@", [image description]);
 			[image class];
 		}
 		XCTAssertTrue(YES);
@@ -78,7 +78,7 @@
             // Yes, this is ARC, yes we do this to quiet a warning
 			NSString *image1Desc = [image description];
 			NSString *image2Desc = [image2 description];
-			NSLog(@"image1: %@, image 2: %@", image1Desc, image2Desc);
+			SVGKLog(@"image1: %@, image 2: %@", image1Desc, image2Desc);
         }
 		XCTAssertTrue(YES);
     }

@@ -1,5 +1,6 @@
 #import "CAShapeLayerWithHitTest.h"
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 /*! Used by the main ShapeElement (and all subclasses) to do perfect "containsPoint" calculations via Apple's API calls
  
@@ -20,7 +21,7 @@
 		{
 			for( CALayer* subLayer in self.sublayers )
 			{
-				SVGKitLogVerbose(@"...contains point, Apple will now check sublayer: %@", subLayer);
+				[SVGKLogger logMessage:@"...contains point, Apple will now check sublayer: %@", subLayer];
 			}
 			return TRUE;
 		}

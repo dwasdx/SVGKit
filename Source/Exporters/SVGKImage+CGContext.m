@@ -12,6 +12,7 @@
 #import "SVGSVGElement.h"
 
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 @implementation SVGKImage (CGContext)
 
@@ -20,8 +21,8 @@
 	NSAssert( [self hasSize], @"Cannot export this image because the SVG file has infinite size. Either fix the SVG file, or set an explicit size you want it to be exported at (by calling .size = something on this SVGKImage instance");
 	if( ! [self hasSize] )
 		return NULL;
-	
-	SVGKitLogVerbose(@"[%@] DEBUG: Generating a CGContextRef using the current root-object's viewport (may have been overridden by user code): {0,0,%2.3f,%2.3f}", [self class], self.size.width, self.size.height);
+
+	[SVGKLogger logMessage:@"[%@] DEBUG: Generating a CGContextRef using the current root-object's viewport (may have been overridden by user code): {0,0,%2.3f,%2.3f}", [self class], self.size.width, self.size.height];
 	
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
 	CGContextRef context = CGBitmapContextCreate( NULL/*malloc( self.size.width * self.size.height * 4 )*/, self.size.width, self.size.height, 8, 4 * self.size.width, colorSpace, (CGBitmapInfo)kCGImageAlphaNoneSkipLast );
@@ -47,7 +48,7 @@
 	startTime = [NSDate date];
 	
 	if( SVGRectIsInitialized(self.DOMTree.viewport) )
-		SVGKitLogInfo(@"[%@] DEBUG: rendering to CGContext using the current root-object's viewport (may have been overridden by user code): %@", [self class], NSStringFromSVGRect(self.DOMTree.viewport) );
+		[SVGKLogger logMessage:@"[%@] DEBUG: rendering to CGContext using the current root-object's viewport (may have been overridden by user code): %@", [self class], NSStringFromSVGRect(self.DOMTree.viewport)];
 	
 	/** Typically a 10% performance improvement right here */
 	if( !shouldAntialias )
@@ -93,8 +94,8 @@
 		[perfImprovements appendString:@" NO-ANTI-ALIAS"];
 	if( perfImprovements.length < 1 )
 		[perfImprovements appendString:@"NONE"];
-	
-	SVGKitLogVerbose(@"[%@] renderToContext: time taken to render CALayers to CGContext (perf improvements:%@): %2.3f seconds)", [self class], perfImprovements, -1.0f * [startTime timeIntervalSinceNow] );
+
+	[SVGKLogger logMessage:@"[%@] renderToContext: time taken to render CALayers to CGContext (perf improvements:%@): %2.3f seconds)", [self class], perfImprovements, -1.0f * [startTime timeIntervalSinceNow] ];
 }
 
 @end

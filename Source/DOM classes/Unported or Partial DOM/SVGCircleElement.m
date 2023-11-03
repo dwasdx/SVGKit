@@ -7,6 +7,7 @@
 
 #import "SVGCircleElement.h"
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 @implementation SVGCircleElement
 
@@ -14,7 +15,7 @@
 
 - (CGFloat)r {
 	if (self.rx != self.ry) {
-		SVGKitLogVerbose(@"Undefined radius of circle");
+		[SVGKLogger logMessage:@"Undefined radius of circle"];
 		return 0.0f;
 	}
 	

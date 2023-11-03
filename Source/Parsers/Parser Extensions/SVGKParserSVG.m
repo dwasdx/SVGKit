@@ -22,6 +22,7 @@
 #import "SVGDocument_Mutable.h"
 
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 @interface SVGKParserSVG ()
 @property (nonatomic) NSArray *supportedNamespaces;
@@ -75,7 +76,7 @@
 		
 		if (!elementClass) {
 			elementClass = [SVGElement class];
-			SVGKitLogWarn(@"Support for '%@' element has not been implemented", name);
+			[SVGKLogger logMessage:@"Support for '%@' element has not been implemented", name];
 		}
 		
 		/**

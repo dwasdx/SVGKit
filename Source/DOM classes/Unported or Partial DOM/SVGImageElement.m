@@ -10,6 +10,7 @@
 #import "SVGKInlineResource.h"
 
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 CGImageRef SVGImageCGImage(UIImage *img)
 {
@@ -103,9 +104,9 @@ CGImageRef SVGImageCGImage(UIImage *img)
             NSError *error = nil;
             imageData = [NSData dataWithContentsOfStream:stream initialCapacity:NSUIntegerMax error:&error];
             if( error )
-                SVGKitLogError(@"[%@] ERROR: unable to read stream from %@ into NSData: %@", [self class], _href, error);
+				[SVGKLogger logMessage: @"[%@] ERROR: unable to read stream from %@ into NSData: %@", [self class], _href, error];
         } else {
-            SVGKitLogError(@"[%@] ERROR: unable to load the source from URL: %@", [self class], _href);
+			[SVGKLogger logMessage:@"[%@] ERROR: unable to load the source from URL: %@"];
         }
 	}
 	
@@ -125,7 +126,7 @@ CGImageRef SVGImageCGImage(UIImage *img)
         
         if( effectiveSource != nil )
         {
-            SVGKitLogInfo(@"Attempting to interpret the image at URL as an embedded SVG link (Apple failed to parse it): %@", _href );
+			[SVGKLogger logMessage:@"Attempting to interpret the image at URL as an embedded SVG link (Apple failed to parse it): %@", _href];
             if( imageData != nil )
             {
                 /** NB: sources can only be used once; we've already opened the stream for the source

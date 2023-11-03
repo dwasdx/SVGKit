@@ -5,6 +5,7 @@
 
 #import "SVGUtils.h"
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 #include <sys/types.h>
 #include <sys/sysctl.h>
@@ -231,7 +232,7 @@ static float cachedDevicePixelsPerInch;
 	
 	if( [platform hasPrefix:@"x86_64"] || [platform hasPrefix:@"arm64"])
 	{
-		SVGKitLogWarn(@"[%@] WARNING: you are running on the simulator; it's impossible for us to calculate centimeter/millimeter/inches units correctly", [self class]);
+		[SVGKLogger logMessage:@"[%@] WARNING: you are running on the simulator; it's impossible for us to calculate centimeter/millimeter/inches units correctly", [self class] ];
 		return 132.0f; // Simulator, running on desktop machine
 	}
 	

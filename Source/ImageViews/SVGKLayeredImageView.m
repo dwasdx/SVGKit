@@ -6,6 +6,7 @@
 #import "SVGKInlineResource.h"
 
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 @interface SVGKLayeredImageView()
 @property(nonatomic,strong) CAShapeLayer* internalBorderLayer;
@@ -82,7 +83,7 @@
 	if( im == nil )
 	{
 #ifndef SVGK_DONT_USE_EMPTY_IMAGE_PLACEHOLDER
-        SVGKitLogWarn(@"[%@] WARNING: you have initialized an [%@] with a blank image (nil). Possibly because you're using Storyboards or NIBs which Apple won't allow us to decorate. Make sure you assign an SVGKImage to the .image property!", [self class], [self class]);
+		[SVGKLogger logMessage:@"[%@] WARNING: you have initialized an [%@] with a blank image (nil). Possibly because you're using Storyboards or NIBs which Apple won't allow us to decorate. Make sure you assign an SVGKImage to the .image property!", [self class], [self class] ];
 #if SVGKIT_UIKIT
 		self.backgroundColor = [UIColor clearColor];
 #else
@@ -90,8 +91,8 @@
 #endif
         
         NSString* svgStringDefaultContents = SVGKGetDefaultContentString();
-        
-		SVGKitLogInfo(@"About to make a blank image using the inlined SVG = %@", svgStringDefaultContents);
+
+		[SVGKLogger logMessage:@"About to make a blank image using the inlined SVG = %@", svgStringDefaultContents];
 		
 		SVGKImage* defaultBlankImage = [SVGKImage imageWithSource:[SVGKSourceString sourceFromContentsOfString:svgStringDefaultContents]];
 		

@@ -8,6 +8,7 @@
 
 #import "NSData+NSInputStream.h"
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 #define BUFSIZE 65536U
 
@@ -51,7 +52,7 @@
         }
     }
     @catch (NSException * exn) {
-        SVGKitLogWarn(@"[%@] WARNING: caught exception writing to file: %@", [self class], exn);
+		[SVGKLogger logMessage:@"[%@] WARNING: caught exception writing to file: %@", [self class], exn];
         result = nil;
         if (error) {
             *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:EIO userInfo:nil];

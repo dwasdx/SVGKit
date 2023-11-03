@@ -2,6 +2,7 @@
 
 #import "SVGKSourceURL.h" // used for delegating when asked to construct relative links
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 @implementation SVGKSourceNSData
 
@@ -46,7 +47,7 @@
 	}
 	else
 	{
-		SVGKitLogError(@"Cannot construct a relative link for this SVGKSource; it was created from anonymous NSData with no source URL provided. Source = %@", self);
+		[SVGKLogger logMessage:@"Cannot construct a relative link for this SVGKSource; it was created from anonymous NSData with no source URL provided. Source = %@", self];
 		return nil;
 	}
 }

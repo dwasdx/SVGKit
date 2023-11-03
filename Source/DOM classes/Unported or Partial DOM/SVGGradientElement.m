@@ -6,6 +6,7 @@
 #import "SVGLinearGradientElement.h"
 #import "SVGRadialGradientElement.h"
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 @implementation SVGGradientElement
 
@@ -87,7 +88,7 @@
     } else if ([gradientUnits isEqualToString:@"userSpaceOnUse"]) {
         return SVG_UNIT_TYPE_USERSPACEONUSE;
     } else {
-        SVGKitLogWarn(@"Unsupported gradientUnits: %@", gradientUnits);
+		[SVGKLogger logMessage:@"Unsupported gradientUnits: %@", gradientUnits];
         return SVG_UNIT_TYPE_UNKNOWN;
     }
 }
@@ -102,7 +103,7 @@
     } else if ([spreadMethod isEqualToString:@"repeat"]) {
         return SVGSpreadMethodRepeat;
     } else {
-        SVGKitLogWarn(@"Unsupported spreadMethod: %@", spreadMethod);
+		[SVGKLogger logMessage:@"Unsupported spreadMethod: %@", spreadMethod];
         return SVGSpreadMethodUnkown;
     }
 }

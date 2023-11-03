@@ -1,6 +1,7 @@
 #import "CSSValueList.h"
 #import "CSSValue_ForSubclasses.h"
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 @interface CSSValueList()
 
@@ -39,7 +40,7 @@
 	_cssText = newCssText;
 	
 	/** the css text value has been set, so we need to split the elements up and save them in the internal array */
-	SVGKitLogVerbose(@"[%@] received new CSS Text, need to split this and save as CSSValue instances: %@", [self class], _cssText);
+	[SVGKLogger logMessage:@"[%@] received new CSS Text, need to split this and save as CSSValue instances: %@", [self class], _cssText];
 	
 	self.internalArray = [_cssText componentsSeparatedByString:@" "];
 }

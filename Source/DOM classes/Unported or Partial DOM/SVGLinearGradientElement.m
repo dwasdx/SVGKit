@@ -10,6 +10,7 @@
 #import "SVGElement_ForParser.h"
 #import "SVGGradientLayer.h"
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 @interface SVGLinearGradientElement ()
 
@@ -93,10 +94,10 @@
         [gradientLayer setLocations:self.locations];
     }
     
-    SVGKitLogVerbose(@"[%@] set gradient layer start = %@", [self class], NSStringFromCGPoint(gradientLayer.startPoint));
-    SVGKitLogVerbose(@"[%@] set gradient layer end = %@", [self class], NSStringFromCGPoint(gradientLayer.endPoint));
-    SVGKitLogVerbose(@"[%@] set gradient layer colors = %@", [self class], self.colors);
-    SVGKitLogVerbose(@"[%@] set gradient layer locations = %@", [self class], self.locations);
+	[SVGKLogger logMessage:@"[%@] set gradient layer start = %@", [self class], NSStringFromCGPoint(gradientLayer.startPoint)];
+	[SVGKLogger logMessage:@"[%@] set gradient layer end = %@", [self class], NSStringFromCGPoint(gradientLayer.endPoint)];
+	[SVGKLogger logMessage:@"[%@] set gradient layer colors = %@", [self class], self.colors];
+	[SVGKLogger logMessage:@"[%@] set gradient layer locations = %@", [self class], self.locations];
     
     return gradientLayer;
 }

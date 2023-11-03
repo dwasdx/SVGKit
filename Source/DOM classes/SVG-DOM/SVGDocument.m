@@ -14,6 +14,7 @@
 #import "NamedNodeMap_Iterable.h" // needed for the allPrefixesByNamespace implementation
 
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 @implementation SVGDocument
 
@@ -171,8 +172,8 @@
 			}
 		}
 	}
-	
-	SVGKitLogVerbose(@"Normalized prefixes:\n%@", normalizedPrefixesByNamespace );
+
+	[SVGKLogger logMessage:@"Normalized prefixes:\n%@", normalizedPrefixesByNamespace];
 	return normalizedPrefixesByNamespace;
 }
 

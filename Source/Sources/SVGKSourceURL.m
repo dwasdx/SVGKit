@@ -1,5 +1,6 @@
 #import "SVGKSourceURL.h"
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 @implementation SVGKSourceURL
 
@@ -38,7 +39,7 @@
 		
 		if( tempData == nil )
 		{
-            SVGKitLogError(@"Error internally in Apple's NSData trying to read from URL '%@'. Error = %@", u, errorWithNSData);
+			[SVGKLogger logMessage:@"Error internally in Apple's NSData trying to read from URL '%@'. Error = %@", u, errorWithNSData];
 		}
 		else
 			stream = [[NSInputStream alloc] initWithData:tempData];

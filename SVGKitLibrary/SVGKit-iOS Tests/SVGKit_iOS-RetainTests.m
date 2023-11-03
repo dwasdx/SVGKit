@@ -57,7 +57,7 @@
 			
 			XCTAssertNoThrow(image = [SVGKImage imageWithContentsOfFile:[self.pathsToSVGs pathForResource:@"Lion" ofType:@"svg"]]);
 			
-			NSLog(@"image description: %@", image.description);
+			SVGKLog(@"image description: %@", image.description);
 		}
 		XCTAssertTrue(YES);
 	}

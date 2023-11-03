@@ -1,6 +1,7 @@
 #import "SVGKExporterUIImage.h"
 #import "SVGKDefine_Private.h"
 
+#import "SVGKLogger.h"
 #if SVGKIT_UIKIT
 #import "SVGKImage+CGContext.h" // needed for Context calls
 
@@ -15,7 +16,7 @@
 {
 	if( [image hasSize] )
 	{
-		SVGKitLogVerbose(@"[%@] DEBUG: Generating a UIImage using the current root-object's viewport (may have been overridden by user code): {0,0,%2.3f,%2.3f}", [self class], image.size.width, image.size.height);
+		[SVGKLogger logMessage:@"[%@] DEBUG: Generating a UIImage using the current root-object's viewport (may have been overridden by user code): {0,0,%2.3f,%2.3f}", [self class], image.size.width, image.size.height];
 		
 		UIGraphicsBeginImageContextWithOptions( image.size, FALSE, [UIScreen mainScreen].scale );
 		CGContextRef context = UIGraphicsGetCurrentContext();

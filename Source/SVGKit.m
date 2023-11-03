@@ -7,14 +7,12 @@
 //
 
 #import "SVGKit.h"
-#import "CocoaLumberjack/DDTTYLogger.h"
-#import "CocoaLumberjack/DDASLLogger.h"
+#import "SVGKLogger.h"
 
 @implementation SVGKit : NSObject
 
 + (void) enableLogging {
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+	[SVGKLogger setLoggingEnabled:YES];
 }
 
 @end

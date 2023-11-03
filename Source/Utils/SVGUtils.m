@@ -7,6 +7,7 @@
 
 #import "SVGUtils.h"
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 #define MAX_ACCUM 64
 #define NUM_COLORS 148
@@ -341,7 +342,7 @@ SVGColor SVGColorFromString (const char *string) {
 		}
 	}
     else if (!strncmp(string, "hsl(", 4) || !strncmp(string, "hsla(", 5)) {
-        CGFloat h; CGFloat s; CGFloat l;
+        CGFloat h = 0; CGFloat s = 0; CGFloat l = 0;
         
         size_t len = strlen(string);
         
@@ -476,7 +477,7 @@ CGFloat SVGPercentageFromString (const char *string) {
 	size_t len = strlen(string);
 	
 	if (string[len-1] != '%') {
-		SVGKitLogWarn(@"Invalid percentage: %s", string);
+		[SVGKLogger logMessage:@"Invalid percentage: %s", string];
 		return -1;
 	}
 	
@@ -508,7 +509,7 @@ CGMutablePathRef createPathFromPointsInString (const char *string, boolean_t clo
         const char *floatPtr = progressPtr;
         float nextCoordinate = strtof(floatPtr, (char**)&progressPtr);
         if (errno != 0 || floatPtr == progressPtr) {
-            SVGKitLogError(@"Unable to parse float from path: \"%s\" errno: %d", string, errno);
+			[SVGKLogger logMessage:@"Unable to parse float from path: \"%s\" errno: %d", string, errno];
             return path;
         }
         

@@ -11,6 +11,7 @@
 #import "SVGLinearGradientElement.h"
 #import "CALayerWithClipRender.h"
 #import "SVGKDefine_Private.h"
+#import "SVGKLogger.h"
 
 @implementation SVGGradientLayer
 
@@ -38,11 +39,11 @@
     NSArray *colors = gradientElement.colors;
     NSArray *locations = gradientElement.locations;
     if (colors.count == 0) {
-        SVGKitLogWarn(@"[%@] colors count is zero", [self class]);
+		[SVGKLogger logMessage:@"[%@] colors count is zero", [self class] ];
         return NULL;
     }
     if (colors.count != locations.count) {
-        SVGKitLogWarn(@"[%@] colors count : %lu != locations count : %lu", [self class], (unsigned long)colors.count, (unsigned long)locations.count);
+		[SVGKLogger logMessage:@"[%@] colors count : %lu != locations count : %lu", [self class], (unsigned long)colors.count, (unsigned long)locations.count];
         return NULL;
     }
     CGFloat locations_array[locations.count];
